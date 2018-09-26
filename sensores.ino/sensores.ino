@@ -36,6 +36,7 @@ void loop() {
   postLDR3();
   postTSL2561();
   postTEMT6000();
+  postDS18B20();
 
   delay(5000);
 
@@ -138,6 +139,19 @@ void postTEMT6000(){
   Serial.write(String(String(media/10).length()).c_str());
   Serial.write(String(media/10).c_str());  
   delay(100);
+}
+
+void postDS18B20(){
+  /*
+  mediaf = 0;
+  for(i=0; i<10; i++){
+    mediaf += bmp180.readTemperature();
+    delay(30);
+  }
+  Serial.write("8");
+  Serial.write(String(String(mediaf/10.0).length()).c_str());
+  Serial.write(String(mediaf/10.0).c_str());  
+  delay(100);*/
 }
 
 
