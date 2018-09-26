@@ -2,7 +2,7 @@ import serial
 import mysql.connector
 
 bd = mysql.connector.connect(user='root', password='raspberry',
-                              host='192.168.0.140',
+                              host='10.0.0.150',
                               database='sensores')
 cursor = bd.cursor()
 
