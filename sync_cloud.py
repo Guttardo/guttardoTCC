@@ -49,6 +49,34 @@ for (COD, id, leitura, data) in registros:
     cursor.execute(delet)
     bd_local.commit()
 
+query = ("SELECT COD, id, leitura, data FROM temt6000 ")
+
+cursor.execute(query)
+
+registros = cursor.fetchall()
+
+for (COD, id, leitura, data) in registros:
+    ins = "INSERT INTO temt6000 (COD, leitura, data, sync) VALUES (uuid(),"+str(leitura)+",'"+data.strftime("%Y-%m-%d %H:%M:%S")+"', 1)"
+    cursor2.execute(ins)
+    bd_cloud.commit()
+    delet = "DELETE FROM temt6000 WHERE `COD` = '"+COD+"' "
+    cursor.execute(delet)
+    bd_local.commit()
+
+query = ("SELECT COD, full, infra, lux, visivel, data FROM tsl2561 ")
+
+cursor.execute(query)
+
+registros = cursor.fetchall()
+
+for (COD, full, infra, lux, visivel, data) in registros:
+    ins = "INSERT INTO tsl2561 (COD, full, infra, lux, visivel, data, sync) VALUES (uuid(),"+str(full)+","+str(infra)+","+str(lux)+","+str(visivel)+",'"+data.strftime("%Y-%m-%d %H:%M:%S")+"', 1)"
+    cursor2.execute(ins)
+    bd_cloud.commit()
+    delet = "DELETE FROM tsl2561 WHERE `COD` = '"+COD+"' "
+    cursor.execute(delet)
+    bd_local.commit()
+
 cursor.close()
 cursor2.close()
 bd_local.close()
