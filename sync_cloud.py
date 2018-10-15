@@ -21,6 +21,34 @@ for (COD, leitura, data) in registros:
     cursor.execute(delet)
     bd_local.commit()
 
+query = ("SELECT COD, leitura, data FROM bmp180 ")
+
+cursor.execute(query)
+
+registros = cursor.fetchall()
+
+for (COD, leitura, data) in registros:
+    ins = "INSERT INTO bmp180 (COD,leitura, data, sync) VALUES (uuid(),"+str(leitura)+",'"+data.strftime("%Y-%m-%d %H:%M:%S")+"', 1)"
+    cursor2.execute(ins)
+    bd_cloud.commit()
+    delet = "DELETE FROM bmp180 WHERE `COD` = '"+COD+"' "
+    cursor.execute(delet)
+    bd_local.commit()
+
+query = ("SELECT COD, id, leitura, data FROM LDR ")
+
+cursor.execute(query)
+
+registros = cursor.fetchall()
+
+for (COD, id, leitura, data) in registros:
+    ins = "INSERT INTO LDR (COD, id, leitura, data, sync) VALUES (uuid(),"+str(id)+","+str(leitura)+",'"+data.strftime("%Y-%m-%d %H:%M:%S")+"', 1)"
+    cursor2.execute(ins)
+    bd_cloud.commit()
+    delet = "DELETE FROM LDR WHERE `COD` = '"+COD+"' "
+    cursor.execute(delet)
+    bd_local.commit()
+
 cursor.close()
 cursor2.close()
 bd_local.close()
