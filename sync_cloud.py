@@ -1,4 +1,5 @@
 import mysql.connector
+import datetime
 
 bd_local = mysql.connector.connect(user='root', password='raspberry',host='192.168.0.140',database='sensores')
 cursor = bd_local.cursor()
@@ -11,7 +12,9 @@ query = ("SELECT COD, leitura, data FROM bh1750 ")
 cursor.execute(query)
 
 for (COD, leitura, data) in cursor:
-    ins = ("INSERT INTO bh1750 (COD,leitura, data) VALUES (uuid(),"+str(leitura)+","+unicode(data.strftime('%Y-%m-%d %H:%M:%S'))+")")
+    strData = unicode(data.strftime("%Y-%m-%d %H:%M:%S"))
+    print(strData)
+    ins = ("INSERT INTO bh1750 (COD,leitura, data) VALUES (uuid(),"+str(leitura)+","+strData+")")
     cursor2.execute(ins)
     bd_cloud.commit()
 
