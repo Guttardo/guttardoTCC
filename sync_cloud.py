@@ -11,7 +11,7 @@ query = ("SELECT COD, leitura, data FROM bh1750 ")
 cursor.execute(query)
 
 for (COD, leitura, data) in cursor:
-    ins = ("INSERT INTO bh1750 (COD,leitura, data) VALUES (uuid(),"+str(leitura)+","+data+")")
+    ins = ("INSERT INTO bh1750 (COD,leitura, data) VALUES (uuid(),"+str(leitura)+","+unicode(data.strftime('%Y-%m-%d %H:%M:%S'))+")")
     cursor2.execute(ins)
     bd_cloud.commit()
 
