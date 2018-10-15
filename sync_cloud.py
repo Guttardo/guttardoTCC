@@ -10,6 +10,10 @@ query = ("SELECT * FROM bh1750 ")
 
 cursor.execute(query)
 
-for (COD,leitura, data) in cursor:
-  print("{}, {} was hired on {:%d %b %Y}".format(
-    COD, leitura, data))
+for (COD) in cursor:
+  print("{}".format(COD))
+
+cursor.close()
+cursor2.close()
+bd_local.close()
+bd_cloud.close()
