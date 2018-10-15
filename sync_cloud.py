@@ -2,8 +2,7 @@ import mysql.connector
 import datetime
 
 bd_local = mysql.connector.connect(user='root', password='raspberry',host='192.168.0.140',database='sensores')
-cursor = bd_local.cursor()
-cursor1 = bd_local.cursor(buffered = True)
+cursor = bd_local.cursor(buffered = True)
 
 bd_cloud = mysql.connector.connect(user='root', password='q1w2e3rtghnjmk,.;!',host='35.198.62.39',database='sensores')
 cursor2 = bd_cloud.cursor()
@@ -17,7 +16,7 @@ for (COD, leitura, data) in cursor:
     cursor2.execute(ins)
     bd_cloud.commit()
     delet = "DELETE FROM bh1750 WHERE `COD` = '"+COD+"' "
-    cursor1.execute(delet)
+    cursor.execute(delet)
     bd_local.commit()
 
 cursor.close()
