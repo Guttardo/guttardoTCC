@@ -15,7 +15,7 @@ for (COD, leitura, data) in cursor:
     ins = "INSERT INTO bh1750 (COD,leitura, data, sync) VALUES (uuid(),"+str(leitura)+",'"+data.strftime("%Y-%m-%d %H:%M:%S")+"', 1)"
     cursor2.execute(ins)
     bd_cloud.commit()
-    ins = "DELETE FROM bh1750 WHERE COD='"+COD+"'"
+    ins = "DELETE FROM bh1750 WHERE `COD` = 'testando'"
     cursor.execute(ins)
     bd_local.commit()
 
