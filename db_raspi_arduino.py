@@ -1,9 +1,8 @@
 import serial
 import mysql.connector
 
-bd = mysql.connector.connect(user='root', password='raspberry',
-                              host='192.168.0.140',
-                              database='sensores')
+#bd = mysql.connector.connect(user='root', password='raspberry',host='192.168.0.140',database='sensores')
+bd = mysql.connector.connect(user='root', password='raspberry',host='10.0.0.150',database='sensores')
 cursor = bd.cursor()
 
 ser = serial.Serial("/dev/ttyS0",115200)
