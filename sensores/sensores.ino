@@ -1,3 +1,4 @@
+
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <Adafruit_BMP085.h>
@@ -38,7 +39,7 @@ void loop() {
   postTEMT6000();
   postDS18B20();
 
-  delay(5000);
+  delay(10000);
 
 }
 
