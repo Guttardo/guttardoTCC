@@ -15,8 +15,9 @@ DeviceAddress sensor1;
 BH1750 lightMeter;
 Adafruit_BMP085 bmp180;
 TSL2561 tsl(TSL2561_ADDR_FLOAT); 
-int media, i;
-float mediaf;
+long media, i, vint, aint;
+float mediaf, vfloat, afloat;
+bool ruido = false;
 long tempo = 100;
 void setup(){
   Serial.begin(115200);
@@ -24,6 +25,7 @@ void setup(){
   Wire.begin();
   lightMeter.begin();
   tsl.begin();
+  tsl.setGain(TSL2561_GAIN_0X);
   tsl.setTiming(TSL2561_INTEGRATIONTIME_13MS);
   bmp180.begin();
 }
@@ -45,7 +47,8 @@ void loop() {
 
 void postBH1750(){
   media = 0;
-  for(i=0; i<10; i++){
+  ruido = false;
+  for(i=1; i<=10; i++){
     media += lightMeter.readLightLevel();
     delay(30);
   }
@@ -112,22 +115,30 @@ void postTSL2561(){
     lum = tsl.getFullLuminosity();
     ir = lum >> 16;
     full = lum & 0xFFFF;
-    mediair += ir;
-    mediafull += full;
-    mediav += full-ir;
-    medialx += tsl.calculateLux(full, ir);
+    if(i==0){
+      mediair += (uint32_t)ir;
+      mediafull += (uint32_t)full;
+      mediav += (uint32_t)(full-ir);
+      medialx += (uint32_t)(tsl.calculateLux(full, ir));
+    }
+    if(i!=0 && abs(ir-mediair)<500 && abs(full-mediafull)<1000){
+      mediair = (mediair + (uint32_t)ir)/2;
+      mediafull = (mediafull + (uint32_t)full)/2;
+      mediav = (mediav + (uint32_t)full - (uint32_t)ir)/2;
+      medialx = (medialx + tsl.calculateLux(full, ir))/2;
+    }
     delay(30);
   }
   
   Serial.write("6");
-  Serial.write(String(String(mediair/10).length()).c_str());
-  Serial.write(String(mediair/10).c_str());
-  Serial.write(String(String(mediafull/10).length()).c_str());
-  Serial.print(String(mediafull/10).c_str());
-  Serial.write(String(String(mediav/10).length()).c_str());
-  Serial.print(String(mediav/10).c_str());   
-  Serial.write(String(String(medialx/10).length()).c_str());
-  Serial.write(String(medialx/10).c_str());
+  Serial.write(String(String(mediair).length()).c_str());
+  Serial.write(String(mediair).c_str());
+  Serial.write(String(String(mediafull).length()).c_str());
+  Serial.print(String(mediafull).c_str());
+  Serial.write(String(String(mediav).length()).c_str());
+  Serial.print(String(mediav).c_str());   
+  Serial.write(String(String(medialx).length()).c_str());
+  Serial.write(String(medialx).c_str());
 }
 
 void postTEMT6000(){
