@@ -8,13 +8,13 @@ import datetime
 bd_cloud = mysql.connector.connect(user='root', password='q1w2e3rtghnjmk,.;!',host='35.198.12.124',database='sensores')
 cursor = bd_cloud.cursor()
 
-sensor = "bmp180"
-dateBegin = "'2018-10-16 17:00:00'"
-dateEnd = "'2018-10-17 00:00:00'"
+sensor = "tsl2561"
+dateBegin = "'2018-10-16 15:37:00'"
+dateEnd = "'2018-10-16 18:00:00'"
 
 if(sensor=="LDR"):
     ins = "SELECT leitura, data from "+ sensor +" where id=1 and data>="+dateBegin+" and data<="+dateEnd+" order by data"
-    
+
     cursor.execute(ins)
     ldr2 = cursor.fetchall()
     ins = "SELECT leitura, data from "+ sensor +" where id=2 and data>="+dateBegin+" and data<="+dateEnd+" order by data"
@@ -35,7 +35,7 @@ elif (sensor=="tsl2561"):
     plt.plot([data for full,infra,lux,visivel,data in dados], [full for full,infra,lux,visivel,data in dados],label='FULL', color='black')
     plt.plot([data for full,infra,lux,visivel,data in dados], [visivel for full,infra,lux,visivel,data in dados],label='Visível', color='deepskyblue')
     plt.plot([data for full,infra,lux,visivel,data in dados], [infra for full,infra,lux,visivel,data in dados],label='Infra-Vermelho', color='red')
-    plt.plot([data for full,infra,lux,visivel,data in dados], [lux for full,infra,lux,visivel,data in dados],label='Lux', color='gold')
+    plt.plot([data for full,infra,lux,visivel,data in dados], [lux for full,infra,lux,visivel,data in dados],label='Lux', color='green')
     plt.legend()
 else:
     ins = "SELECT leitura, data from "+ sensor +" where data>="+dateBegin+" and data<="+dateEnd+" order by data"
