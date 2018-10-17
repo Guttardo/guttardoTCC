@@ -52,7 +52,7 @@ void postBH1750(){
     media += lightMeter.readLightLevel();
     delay(30);
   }
-  Serial.write("1");
+  Serial.write("a");
   Serial.write(String(String(media/10).length()).c_str());
   Serial.write(String(media/10).c_str());  
   delay(100);
@@ -64,7 +64,7 @@ void postBMP180(){
     mediaf += bmp180.readTemperature();
     delay(30);
   }
-  Serial.write("2");
+  Serial.write("b");
   Serial.write(String(String(mediaf/10.0).length()).c_str());
   Serial.write(String(mediaf/10.0).c_str());  
   delay(100);
@@ -76,7 +76,7 @@ void postLDR1(){
     media += analogRead(A2);
     delay(30);
   }
-  Serial.write("3");
+  Serial.write("c");
   Serial.write(String(String(media/10).length()).c_str());
   Serial.write(String(media/10).c_str());  
   delay(100);
@@ -88,7 +88,7 @@ void postLDR2(){
     media += analogRead(A1);
     delay(30);
   }
-  Serial.write("4");
+  Serial.write("d");
   Serial.write(String(String(media/10).length()).c_str());
   Serial.write(String(media/10).c_str());  
   delay(100);
@@ -101,7 +101,7 @@ void postLDR3(){
     media += analogRead(A0);
     delay(30);
   }
-  Serial.write("5");
+  Serial.write("e");
   Serial.write(String(String(media/10).length()).c_str());
   Serial.write(String(media/10).c_str());  
   delay(100);
@@ -130,7 +130,7 @@ void postTSL2561(){
     delay(30);
   }
   
-  Serial.write("6");
+  Serial.write("f");
   Serial.write(String(String(mediair).length()).c_str());
   Serial.write(String(mediair).c_str());
   Serial.write(String(String(mediafull).length()).c_str());
@@ -147,7 +147,7 @@ void postTEMT6000(){
     media += analogRead(A3);
     delay(30);
   }
-  Serial.write("7");
+  Serial.write("g");
   Serial.write(String(String(media/10).length()).c_str());
   Serial.write(String(media/10).c_str());  
   delay(100);

@@ -14,32 +14,32 @@ while(True):
 
 while(True):
 	ident = ser.read(1)
-	if ident == '1':
+	if ident == 'a':
 		buf = ser.read(1)
 		leitura = str(ser.read(int(buf)))
 		ins = ("INSERT INTO bh1750 (COD,leitura) VALUES (uuid(),"+leitura+")")
 		cursor.execute(ins)
-	elif ident == '2':
+	elif ident == 'b':
 		buf = ser.read(1)
 		leitura = str(ser.read(int(buf)))
 		ins = ("INSERT INTO bmp180 (COD,leitura) VALUES (uuid(),"+leitura+")")
 		cursor.execute(ins)
-	elif ident == '3':
+	elif ident == 'c':
 		buf = ser.read(1)
 		leitura = str(ser.read(int(buf)))
 		ins = ("INSERT INTO LDR (COD,id,leitura) VALUES (uuid(),'1',"+leitura+")")
 		cursor.execute(ins)
-	elif ident == '4':
+	elif ident == 'd':
 		buf = ser.read(1)
 		leitura = str(ser.read(int(buf)))
 		ins = ("INSERT INTO LDR (COD,id,leitura) VALUES (uuid(),'2',"+leitura+")")
 		cursor.execute(ins)
-	elif ident == '5':
+	elif ident == 'e':
 		buf = ser.read(1)
 		leitura = str(ser.read(int(buf)))
 		ins = ("INSERT INTO LDR (COD,id,leitura) VALUES (uuid(),'3',"+leitura+")")
 		cursor.execute(ins)
-	elif ident == '6':
+	elif ident == 'f':
 		buf = ser.read(1)
 		ir = str(ser.read(int(buf))) 
 		buf = ser.read(1)
@@ -50,7 +50,7 @@ while(True):
 		lx = str(ser.read(int(buf)))
 		ins = ("INSERT INTO tsl2561 (COD,full,infra,visivel,lux) VALUES (uuid(),"+full+","+ir+","+vi+","+lx+")") 
 		cursor.execute(ins)
-	elif ident == '7':
+	elif ident == 'g':
 		buf = ser.read(1)
 		leitura = str(ser.read(int(buf)))
 		ins = ("INSERT INTO temt6000 (COD,leitura) VALUES (uuid(),"+leitura+")")
