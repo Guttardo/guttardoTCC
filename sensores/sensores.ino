@@ -41,7 +41,7 @@ void loop() {
   postTEMT6000();
   postDS18B20();
 
-  delay(10000);
+  delay(20000);
 
 }
 
