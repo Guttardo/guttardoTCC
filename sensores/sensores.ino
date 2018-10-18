@@ -20,7 +20,7 @@ float mediaf, vfloat, afloat;
 bool ruido = false;
 long tempo = 100;
 void setup(){
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.setTimeout(tempo);
   Wire.begin();
   lightMeter.begin();
