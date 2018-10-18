@@ -31,6 +31,7 @@ while(True):
 		cursor.execute(ins)
 	elif ident == 'd':
 		buf = ser.read(1)
+		print("O buffer foi: "+buf)
 		leitura = str(ser.read(int(buf)))
 		ins = ("INSERT INTO LDR (COD,id,leitura) VALUES (uuid(),'2',"+leitura+")")
 		cursor.execute(ins)
