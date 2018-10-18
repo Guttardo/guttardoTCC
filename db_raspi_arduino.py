@@ -5,7 +5,7 @@ bd = mysql.connector.connect(user='root', password='raspberry',host='192.168.0.1
 #bd = mysql.connector.connect(user='root', password='raspberry',host='10.0.0.150',database='sensores')
 cursor = bd.cursor()
 
-ser = serial.Serial("/dev/ttyS0",9600)
+ser = serial.Serial("/dev/ttyS0",115200)
 
 while(True):
 	verifica_inicio = ser.read(1)
@@ -31,7 +31,6 @@ while(True):
 		cursor.execute(ins)
 	elif ident == 'd':
 		buf = ser.read(1)
-		print("O buffer de D foi:"+buf)
 		leitura = str(ser.read(int(buf)))
 		ins = ("INSERT INTO LDR (COD,id,leitura) VALUES (uuid(),'2',"+leitura+")")
 		cursor.execute(ins)
